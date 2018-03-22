@@ -19,6 +19,7 @@
 			<canvas id="myChart" class="w-100"></canvas>
 		</div>
 		<div class="col-6">
+			<h5>Order History</h5>
 			<canvas id="myChart2" class="w-100"></canvas>
 		</div>
 	</div>

@@ -42,6 +42,9 @@
         $(function() {
 
             $('.rangepicker').daterangepicker({
+                "locale": {
+                  "format": "DD/MM/YYYY"
+                },
                 "showDropdowns": true,
                 "showWeekNumbers": true,
                 "autoApply": true,
@@ -53,8 +56,6 @@
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
-                "startDate": "03/14/2018",
-                "endDate": "03/20/2018",
                 "opens": "left"
             }, function(start, end, label) {
               console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
