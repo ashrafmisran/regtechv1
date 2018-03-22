@@ -32,19 +32,11 @@
 		<input type="file" name="list" class="form-control col-md-10" multiple>
 	</div>
 	<div class="form-group row">
-		<label class="col-md-2">iTradess Report: </label>
-		<input type="file" name="itradess" class="form-control col-md-10">
-	</div>
-	<div class="form-group row">
-		<label class="col-md-2">Matched</label>
-		<input type="number" name="matched" class="form-control col-md-10" min="0" value="0">
-	</div>
-	<div class="form-group row">
 		<label class="col-md-2">Replied e-mail to IO</label>
 		<input type="file" name="reply" class="form-control col-md-10">
 	</div>
 	<div class="form-group row">
-		<label class="col-md-2">Remark: </label>
+		<label class="col-md-2">Remark</label>
 		<textarea class="form-control col-md-10" rows="5" name="remark"></textarea>
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
