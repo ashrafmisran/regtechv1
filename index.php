@@ -19,6 +19,9 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
 
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
 
     <title>Compliance Review Processor</title>
   </head>
@@ -172,6 +175,33 @@
 
     </script>
 
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script type="text/javascript">
+      $('#search').select2({
+          placeholder: 'Type account no. / receipt no. / payment no.',
+          ajax: {
+            url: 'https://api.github.com/search/repositories',
+            dataType: 'json',
+            data: function (params) {
+              var query = {
+                search: params.term,
+                type: 'public'
+              }
+
+              // Query parameters will be ?search=[term]&type=public
+              return query;
+            },
+            processResults: function (data) {
+              // Tranforms the top-level key of the response object from 'items' to 'results'
+              return {
+                results: data.items
+              };
+            }
+          }
+      });
+    </script>
+
     <script type="text/javascript">
       $(document).ready(function() {
         $('.dtable').DataTable({
@@ -179,6 +209,10 @@
           "scrollX": true
         });
       })
+
+      function get_suggestion(){
+        alert('Suggestion')
+      }
     </script>
   </body>
 </html>
