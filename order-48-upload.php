@@ -28,8 +28,17 @@
 		<input type="file" name="fins-email" class="form-control col-md-10">
 	</div>
 	<div class="form-group row">
-		<label class="col-md-2">List files</label>
-		<input type="file" name="list" class="form-control col-md-10" multiple>
+		<label class="col-md-2">Attached files</label>
+		<input type="file" name="attachment" class="form-control col-md-10" multiple data-toggle="tooltip" data-placement="bottom" title="You may upload multiple files">
+	</div>
+	<hr>
+	<div class="form-group row">
+		<label class="col-md-2">Processed on</label>
+		<input type="text" name="process-date" class="singledatepicker form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The date compliance officer process the order">
+	</div>
+	<div class="form-group row">
+		<label class="col-md-2">Matched</label>
+		<input type="number" name="matched" class="form-control col-md-10" min="0" value="0">
 	</div>
 	<div class="form-group row">
 		<label class="col-md-2">Replied e-mail to IO</label>
