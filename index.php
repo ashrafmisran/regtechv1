@@ -189,6 +189,9 @@
           "scrollX": true
         });
       })
+
+      // Tooltip for entering the form
+      $('#upload-form *').tooltip();
     </script>
   </body>
 </html>
