@@ -5,6 +5,23 @@
 		<h3 class="text-center">Upload order 48</h3>
 		<form id="upload-form" class="container" action="order-48-upload-processor.php" method="post" enctype="multipart/form-data">
 			<div class="form-group row">
+				<label class="col-md-2">Order Id</label>
+				<input type="text" name="order-id" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
+					if(isset($_GET['id'])){
+						echo $_GET['id'];
+					}else{
+						echo(time());
+					}
+				?>">
+				<input type="text" name="new-or-edit" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
+					if(isset($_GET['id'])){
+						echo 'edit';
+					}else{
+						echo('new');
+					}
+				?>" hidden>
+			</div>
+			<div class="form-group row">
 				<label class="col-md-2">Order Date</label>
 				<input type="text" name="order-date" class="singledatepicker form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The date the inquirer sent the order to FINS">
 			</div>
