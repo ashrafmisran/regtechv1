@@ -25,7 +25,7 @@
 				<label class="col-md-2">Order Id</label>
 				<input type="text" name="order-id" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
 					if(isset($_GET['id'])){
-						echo $_GET['id'];
+						echo 'FINS-'. $_GET['id'];
 					}else{
 						$sql = 'SELECT order_id as row FROM order_48 ORDER BY order_id DESC LIMIT 1';
 						$run = $conn->query($sql);
