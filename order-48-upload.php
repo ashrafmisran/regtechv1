@@ -6,11 +6,16 @@
 		<form id="upload-form" class="container" action="order-48-upload-processor.php" method="post" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-md-2">Order Id</label>
-				<input type="text" name="order-id" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
+				<input type="text" name="order-id" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="FINS-<?php 
 					if(isset($_GET['id'])){
 						echo $_GET['id'];
 					}else{
-						echo(time());
+						$sql = 'SELECT COUNT(*) as row FROM order_48';
+						$run = $conn->query($sql);
+						
+						while($row = $run->fetch_assoc()){
+							echo(100001+$row['row']);
+						}
 					}
 				?>">
 				<input type="text" name="new-or-edit" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
