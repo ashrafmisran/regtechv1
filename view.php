@@ -1,0 +1,1 @@
+<iframe class="doc" src="https://docs.google.com/gview?url=http://localhost/regtechv1/documents/amla/2018/03/20/1522038978/2 - Attachment 5.docx&embedded=true"></iframe>

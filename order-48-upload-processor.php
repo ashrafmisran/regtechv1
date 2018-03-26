@@ -1,4 +1,4 @@
-<?php 
+	<?php 
 
 	session_start();
 	include 'connect.php';
@@ -75,6 +75,7 @@
 				if ($uploadOk) {
 					if (move_uploaded_file($_FILES["fins-email"]["tmp_name"], $target_file)) {
 						// echo "Uploaded. Check it <a href=\"$target_file\">here</a>.";
+						$email_receipt = $target_file;
 					}else{
 						// echo "Failed uploading";
 					}
@@ -86,6 +87,8 @@
 
 				$attachments = $_FILES['attachment'];
 				$no_of_attachment = count($attachments['name']);
+
+				$attached_files = array();
 
 				for ($i=0; $i < $no_of_attachment; $i++) { 
 					
@@ -111,6 +114,7 @@
 					if ($uploadOk) {
 						if (move_uploaded_file($attachments["tmp_name"][$i], $target_file)) {
 							// echo "Uploaded. Check it <a href=\"$target_file\">here</a>. ";
+							array_push($attached_files, $target_file);
 						}else{
 							// echo "Failed uploading. ";
 						}
@@ -119,6 +123,8 @@
 					}
 
 				}
+
+				$attached_files = serialize($attached_files);
 
 			// reply
 				$target_file = $batch_folder.'/3 - Replied Email.msg'; // New filename
@@ -141,6 +147,7 @@
 				if ($uploadOk) {
 					if (move_uploaded_file($_FILES["reply"]["tmp_name"], $target_file)) {
 						// echo "Uploaded. Check it <a href=\"$target_file\">here</a>.";
+						$email_replied = $target_file;
 					}else{
 						// echo "Failed uploading";
 					}
@@ -150,6 +157,16 @@
 			
 
 	// 5 - Save the name of the uploaded files in variable
+
+		$sql = 'INSERT INTO order_48 (order_id,order_date,receive_date,email_receipt,attached_files,process_date,matched,email_replied,remark) 
+							  VALUES ("'.$_POST['order-id'].'","'.$_POST['order-date'].'","'.$_POST['email-received-date'].'","'.$email_receipt.'","'.$attached_files.'","'.$_POST['process-date'].'","'.$_POST['matched'].'","'.$email_replied.'","'.$_POST['remark'].'")';
+
+		$run = $conn->query($sql);
+		if ($run!=FALSE) {
+			header('Location: '.$_SERVER['HTTP_REFERER']);
+		}else{
+			echo "Failed storing data into database. Reason: ".$conn->error;
+		}
 
 
 	// 6 - Store all the info in database
