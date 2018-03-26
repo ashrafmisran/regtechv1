@@ -3,19 +3,40 @@
 	if ( !isset($_GET['date']) ) { ?>
 		
 		<h3 class="text-center">Upload order 48</h3>
+		<?php if(isset($_SESSION['type']) && $_SESSION['type'] == 'Success') { ?>
+			<div class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<strong>Order successfully added!</strong> You may edit it before submission.
+			</div>
+		<?php }elseif (isset($_SESSION['type']) && $_SESSION['type'] == 'Failed') { ?>
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<strong>Order failed to be added!</strong> Please try again.
+			</div>		
+		<?php } ?>
 		<form id="upload-form" class="container" action="order-48-upload-processor.php" method="post" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-md-2">Order Id</label>
-				<input type="text" name="order-id" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="FINS-<?php 
+				<input type="text" name="order-id" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
 					if(isset($_GET['id'])){
 						echo $_GET['id'];
 					}else{
-						$sql = 'SELECT COUNT(*) as row FROM order_48';
+						$sql = 'SELECT order_id as row FROM order_48 ORDER BY order_id DESC LIMIT 1';
 						$run = $conn->query($sql);
-						
-						while($row = $run->fetch_assoc()){
-							echo(100001+$row['row']);
+						if($run->num_rows > 0) {
+							while($row = $run->fetch_assoc()){
+								echo('FINS-'.(1+$row['row']));
+							}
+						}else{
+							echo('FINS-100000');
 						}
+						
 					}
 				?>">
 				<input type="text" name="new-or-edit" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 

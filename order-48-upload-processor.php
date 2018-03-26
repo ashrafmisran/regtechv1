@@ -158,14 +158,24 @@
 
 	// 5 - Save the name of the uploaded files in variable
 
-		$sql = 'INSERT INTO order_48 (order_id,order_date,receive_date,email_receipt,attached_files,process_date,matched,email_replied,remark) 
-							  VALUES ("'.$_POST['order-id'].'","'.$_POST['order-date'].'","'.$_POST['email-received-date'].'","'.$email_receipt.'","'.$attached_files.'","'.$_POST['process-date'].'","'.$_POST['matched'].'","'.$email_replied.'","'.$_POST['remark'].'")';
+		$id = substr($_POST['order-id'],5);
+		$order_date = substr($_POST['order-date'],6,4) .'-'. substr($_POST['order-date'],3,2) .'-'. substr($_POST['order-date'],0,2);
+		$email_received_date = substr($_POST['email-received-date'],6,4) .'-'. substr($_POST['email-received-date'],3,2) .'-'. substr($_POST['email-received-date'],0,2);
+
+		$process_date = substr($_POST['process-date'],6,4) .'-'. substr($_POST['process-date'],3,2) .'-'. substr($_POST['process-date'],0,2);
+		$matched = $_POST['matched'];
+		$remark = $_POST['remark'];
+
+		$sql = "INSERT INTO order_48 (order_id,order_date,receive_date,process_date,matched,remark) 
+							  VALUES ('$id','$order_date','$email_received_date','$process_date','$matched','$remark')";
 
 		$run = $conn->query($sql);
+
 		if ($run!=FALSE) {
-			header('Location: '.$_SERVER['HTTP_REFERER']);
+			$_SESSION['type'] = "Success";
+			header('Location: '.$_SERVER['HTTP_REFERER'].'&id='.$id);
 		}else{
-			echo "Failed storing data into database. Reason: ".$conn->error;
+			$_SESSION['noti'] = "Failed storing data into database. Reason: ".$conn->error;
 		}
 
 
