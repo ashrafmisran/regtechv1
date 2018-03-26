@@ -61,6 +61,16 @@
               console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
             });
             
+            $('.singledatepicker').daterangepicker({
+                "locale": {
+                  "format": "DD/MM/YYYY"
+                },
+                "singleDatePicker":true,
+                "showDropdowns": true,
+                "showWeekNumbers": true,
+                "autoApply": true,
+                "opens": "left"
+            })
         });
     </script>
 
@@ -179,6 +189,9 @@
           "scrollX": true
         });
       })
+
+      // Tooltip for entering the form
+      $('#upload-form *').tooltip();
     </script>
   </body>
 </html>
