@@ -23,7 +23,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 
-    <title>Compliance Review Processor</title>
+    <title>CGD</title>
   </head>
   <body>
     <?php include 'navbar.php'; ?>
@@ -64,6 +64,16 @@
               console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
             });
             
+            $('.singledatepicker').daterangepicker({
+                "locale": {
+                  "format": "DD/MM/YYYY"
+                },
+                "singleDatePicker":true,
+                "showDropdowns": true,
+                "showWeekNumbers": true,
+                "autoApply": true,
+                "opens": "left"
+            })
         });
     </script>
 
@@ -210,9 +220,14 @@
         });
       })
 
+<<<<<<< HEAD
       function get_suggestion(){
         alert('Suggestion')
       }
+=======
+      // Tooltip for entering the form
+      $('#upload-form *').tooltip();
+>>>>>>> master
     </script>
   </body>
 </html>
