@@ -14,7 +14,7 @@
 					}
 				?>">
 				<input type="text" name="new-or-edit" class="form-control col-md-10" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
-					if(isset($_GET['id'])){
+					if(isset($_GET['id'])){ 
 						echo 'edit';
 					}else{
 						echo('new');
