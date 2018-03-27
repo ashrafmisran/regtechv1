@@ -175,7 +175,7 @@
 
 		if ($run!=FALSE) {
 			$_SESSION['type'] = "Success";
-			header('Location: '.$_SERVER['HTTP_REFERER'].'&id='.$id);
+			header('Location: index.php?p=order-48-report');
 		}else{
 			$_SESSION['noti'] = "Failed storing data into database. Reason: ".$conn->error;
 		}
