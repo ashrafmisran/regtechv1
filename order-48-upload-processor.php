@@ -53,9 +53,11 @@
 
 	// 4 - Upload email and attachment files
 
+		$init = $id.' ';
+
 		// Rename the attachment to standard name {EmailReceived, Attachment1,2,3, EmailReplied}, then upload
 			// fins-email
-				$target_file = $batch_folder.'/1 - Received Email.msg';
+				$target_file = $batch_folder.'/'.$init.'1 - Received Email.msg';
 				$fileType = $imageFileType = $_FILES['fins-email']['type'];
 				$uploadOk = true;
 
@@ -94,7 +96,7 @@
 					
 					$j = $i+1; // Numbering
 					$fileType = pathinfo($attachments['name'][$i], PATHINFO_EXTENSION); // File extension
-					$target_file = $batch_folder.'/2 - Attachment '   .$j.   '.'   .$fileType; // New file name and location
+					$target_file = $batch_folder.'/'.$init.'2 - Attachment '   .$j.   '.'   .$fileType; // New file name and location
 					
 					$uploadOk = true;
 
@@ -127,7 +129,7 @@
 				$attached_files = serialize($attached_files);
 
 			// reply
-				$target_file = $batch_folder.'/3 - Replied Email.msg'; // New filename
+				$target_file = $batch_folder.'/'.$init.'3 - Replied Email.msg'; // New filename
 				$fileType = pathinfo($_FILES['reply']['name'], PATHINFO_EXTENSION); // File extension
 				$uploadOk = true;
 
