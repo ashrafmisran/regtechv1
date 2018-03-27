@@ -24,6 +24,8 @@
     <!-- Select2 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
 
     <title>CGD</title>
   </head>
@@ -217,11 +219,15 @@
     <!-- Tab for AMLA -->
     <script type="text/javascript">
         $('#tab-amla-report').find('a').click( function(event){
+            // Set active for clicked tab button
             $('#tab-amla-report').find('a').removeClass('active');
             $(this).addClass('active');
             var tab = $(this).data('tab');
 
+            // Hide previous tab and show clicked tab
             $('.tab-box').addClass('d-none');
+            $('.tab-box').removeClass('fade');
+            $(tab).addClass('fadeIn');
             $(tab).removeClass('d-none');
         })
 
