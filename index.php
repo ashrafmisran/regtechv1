@@ -224,7 +224,33 @@
             $('.tab-box').addClass('d-none');
             $(tab).removeClass('d-none');
         })
+
+
+        $('#select-all-orders,#select-all-reports').change(function (){
+            if(this.checked) {
+                $(this).parent().parent().parent().parent().find('.checkbox').prop('checked',true);
+            }else if(!this.checked) {
+                $(this).parent().parent().parent().parent().find('.checkbox').prop('checked',false);
+            }
+        })
+
+        $('#order-tab,#report-tab').find('.checkbox').change(function(){
+            if(!this.checked){
+                $(this).parent().parent().parent().parent().find('#select-all-orders,#select-all-reports').prop('checked',false)
+            }
+        })
+
+        $('#order-tab,#report-tab').find('tr').click(function(){
+            var checkbox = $(this).find('.checkbox');
+
+            if(!checkbox.checked){
+                checkbox.prop('checked',true);
+            }else if(checkbox.prop('checked') != false){
+                checkbox.prop('checked',false);
+            }
+        })
     </script>
+
 
     <script type="text/javascript">
       $(document).ready(function() {
