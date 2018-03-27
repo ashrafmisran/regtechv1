@@ -1,5 +1,9 @@
 <?php include 'connect.php'; ?>
+<<<<<<< HEAD
 <?php include 'vendor/autoload.php'; ?>
+=======
+<?php include 'function.php'; ?>
+>>>>>>> View-excel-in-browser
 <!doctype html>
 <html lang="en">
   <head>
@@ -213,6 +217,18 @@
       });
     </script>
 
+    <!-- Tab for AMLA -->
+    <script type="text/javascript">
+        $('#tab-amla-report').find('a').click( function(event){
+            $('#tab-amla-report').find('a').removeClass('active');
+            $(this).addClass('active');
+            var tab = $(this).data('tab');
+
+            $('.tab-box').addClass('d-none');
+            $(tab).removeClass('d-none');
+        })
+    </script>
+
     <script type="text/javascript">
       $(document).ready(function() {
         $('.dtable').DataTable({
@@ -221,14 +237,11 @@
         });
       })
 
-<<<<<<< HEAD
       function get_suggestion(){
         alert('Suggestion')
       }
-=======
       // Tooltip for entering the form
       $('#upload-form *').tooltip();
->>>>>>> master
     </script>
   </body>
 </html>
