@@ -231,7 +231,6 @@
             $(tab).removeClass('d-none');
         })
 
-
         $('#select-all-orders,#select-all-reports').change(function (){
             if(this.checked) {
                 $(this).parent().parent().parent().parent().find('.checkbox').prop('checked',true);
@@ -240,20 +239,19 @@
             }
         })
 
+        // Uncheck 'Select all' checkbox if any of the checkboxes is unchecked
         $('#order-tab,#report-tab').find('.checkbox').change(function(){
             if(!this.checked){
                 $(this).parent().parent().parent().parent().find('#select-all-orders,#select-all-reports').prop('checked',false)
             }
         })
 
+        // Enable click on table row to checked/unchecked the checkbox
         $('#order-tab,#report-tab').find('tr').click(function(){
             var checkbox = $(this).find('.checkbox');
 
-            if(!checkbox.checked){
-                checkbox.prop('checked',true);
-            }else if(checkbox.prop('checked') != false){
-                checkbox.prop('checked',false);
-            }
+            checkbox.prop('checked', !checkbox.prop("checked") );
+            checkbox.parent().parent().parent().parent().find('#select-all-orders,#select-all-reports').prop('checked',false)
         })
     </script>
 
