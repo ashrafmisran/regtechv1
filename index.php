@@ -1,4 +1,5 @@
 <?php include 'connect.php'; ?>
+<?php include 'vendor/autoload.php'; ?>
 <!doctype html>
 <html lang="en">
   <head>
