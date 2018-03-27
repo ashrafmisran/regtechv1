@@ -1,9 +1,6 @@
 <?php include 'connect.php'; ?>
-<<<<<<< HEAD
 <?php include 'vendor/autoload.php'; ?>
-=======
 <?php include 'function.php'; ?>
->>>>>>> View-excel-in-browser
 <!doctype html>
 <html lang="en">
   <head>
