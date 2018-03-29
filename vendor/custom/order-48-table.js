@@ -65,10 +65,6 @@ $('.modal').on('shown.bs.modal', function (e) {
 })
 
 
-$('.modal').on('hidden.bs.modal', function (e) {
-    window.location.reload();
-})
-
 
 function check(checkbox, array) {
     if (checkbox.prop('checked')) {
@@ -87,4 +83,14 @@ function removeFrom(table,array){
 
     // Once clicked 'Confirm delete' button, this PHP file will be loaded and show deleted/failed deletion.
     document.getElementById('notification-box').innerHTML = '<iframe style="border: 0;max-height: 50px;width: 100%;" src="'+removeFile+'"></iframe>';
+
+    // Hide the confirm and cancel buttons and show close button
+    $('#order-confirm-btn, #order-cancel-btn').addClass('d-none');
+    $('#order-close-btn').removeClass('d-none');
+
+
+    // Reload page once the modal closed
+    $('.modal').on('hidden.bs.modal', function (e) {
+        window.location.reload();
+    })
 }
