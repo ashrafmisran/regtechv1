@@ -64,8 +64,67 @@ $('.modal').on('shown.bs.modal', function (e) {
     $('.focus').trigger('focus')
 })
 
+// Generate send email form
+$('#modal-reply-order').on('shown.bs.modal', function (event) {
+    var replyFrom = $(event.relatedTarget).data('reply-from');
+    var replyTo = $(event.relatedTarget).data('reply-to');
+    var ccTo = $(event.relatedTarget).data('cc-to');
+    var replySubject = $(event.relatedTarget).data('subject');
+    var now = new Date();
+    var content = 
+        '<p>Dear Sir,</p>'+
+        '<p>Please find below our reply to the order served under Section 48 of AMLATFPUAA 2001: </p>'+
+        '<table style="width:100%">'+
+            '<tr>'+
+                '<td>Reply to</td>'+
+                '<td>Order dated......</td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td>Order Received</td>'+
+                '<td>Order dated......</td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td>Bank</td>'+
+                '<td>BIMB Securities Sdn Bhd</td>'+
+            '</tr>'+
+        '</table>'+
+        '<p>To provide all account(s) information under the name of the person(s) specified in the Order 48 AMLATFPUAA and any other accounts that this person is authorised to be as either the :</p>'+
+        '<ol>'+
+            '<li>Signatory; or</li>'+
+            '<li>Mandatee</li>'+
+        '</ol>'+
+        '<table>'+
+            '<tr>'+
+                '<td>Account Holder</td>'+
+                '<td>Account Number</td>'+
+                '<td>Branch</td>'+
+                '<td>Account Type</td>'+
+                '<td>Status<br>Active/Dormant/Closed</td>'+
+                '<td>Balance as at '+now.getDate()+'/'+now.getMonth()+'/'+now.getFullYear()+'</td>'+
+                '<td>Date Account Open</td>'+
+                '<td>Remarks</td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>'+
+            '</tr>'+
+        '</table>'+
+        '<p>Thank you.</p>'+
+        '<p>FIRST END2END SHARIAH</p>';
 
+    $('#reply-from').val(replyFrom);
+    $('#reply-to').val(replyTo);
+    $('#reply-cc').val(ccTo);
+    $('#reply-subject').val(replySubject);
+    tinyMCE.activeEditor.setContent(content);
+})
 
+// Push selected row to array function
 function check(checkbox, array) {
     if (checkbox.prop('checked')) {
         array.push(checkbox.val());
@@ -75,6 +134,7 @@ function check(checkbox, array) {
     }
     console.log(array);
 };
+
 
 function removeFrom(table,array){
     array = array.toString();
@@ -94,3 +154,4 @@ function removeFrom(table,array){
         window.location.reload();
     })
 }
+

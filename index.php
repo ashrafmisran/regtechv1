@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
 
     <title>CGD</title>
+
+    <!-- TinyMCE -->
+    <script src="vendor/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea.tinymce' });</script>
+
   </head>
   <body>
     <?php include 'navbar.php'; ?>
