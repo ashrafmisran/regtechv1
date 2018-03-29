@@ -65,6 +65,11 @@ $('.modal').on('shown.bs.modal', function (e) {
 })
 
 
+$('.modal').on('hidden.bs.modal', function (e) {
+    window.location.reload();
+})
+
+
 function check(checkbox, array) {
     if (checkbox.prop('checked')) {
         array.push(checkbox.val());
@@ -75,25 +80,11 @@ function check(checkbox, array) {
     console.log(array);
 };
 
-function callAjax(url, callback){
-    var xmlhttp;
-    // compatible with IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function(){
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-            callback(xmlhttp.responseText);
-        }
-    }
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-}
-
 function removeFrom(table,array){
     array = array.toString();
     var removeFile = 'remove.php?t='+table+'&id='+array;
     console.log(removeFile);
 
-    callAjax(removeFile);
-    
+    // Once clicked 'Confirm delete' button, this PHP file will be loaded and show deleted/failed deletion.
+    document.getElementById('notification-box').innerHTML = '<iframe style="border: 0;max-height: 50px;width: 100%;" src="'+removeFile+'"></iframe>';
 }
-
