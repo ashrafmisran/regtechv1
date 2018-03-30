@@ -1,23 +1,24 @@
 <?php
+    session_start();
 
 	$senderEmailAdd = $_GET['sender'];
 	$to 			= $_GET['to'];
 	$cc 			= $_GET['cc'];
-	$subject		= $_GET['subject'];
-	$replyTo		= $_GET['replyto'];
+	/*$subject	= */  preg_match('/(Section 48.*)(?:\.msg)/', $_GET['subject'], $subject);
+	/*$replyTo = */   preg_match('/(Order dated.*)(?:\.msg)/', $_GET['subject'], $replyTo);
 	$orderReceived 	= $_GET['orderreceiveddate'];
 	$to 			= $_GET['to'];
-	$senderName		= $_GET['sender'];
-	$senderPosition	= $_GET['post'];
-	$senderTel		= $_GET['tel'];
-    $senderEmailAdd = $_GET['email'];
+	$senderName		= $_SESSION['user']['fullname'];
+	$senderPosition	= $_SESSION['user']['position'];
+	$senderTel		= $_SESSION['user']['phone'];
+    $senderEmailAdd = $_SESSION['user']['email'];
 
 	$content		= 'From: '.$senderEmailAdd.'
 MIME-Version: 1.0
 X-Unsent: 1
 To: '.$to.'
 Cc: '.$cc.'
-Subject: '.$subject.'
+Subject: '.$subject[1].'
 Content-Type: multipart/mixed; boundary="080107000800000609090108"
 
 This is a message with multiple parts in MIME format.
@@ -29,7 +30,7 @@ Content-Type: text/html
 <table style="width:70%; border: 1px black solid">
     <tr>
         <td style="background:lightgray; font-weight:bold; width: 30%; border: 1px black solid; height:1em">Reply to</td>
-        <td style="border: 1px black solid; height:1em">'.$replyTo.'</td>
+        <td style="border: 1px black solid; height:1em">'.$replyTo[1].'</td>
     </tr>
     <tr>
         <td style="background:lightgray; font-weight:bold; width: 30%; border: 1px black solid; height:1em">Order Received</td>
@@ -90,7 +91,7 @@ Content-Type: text/html
 <p>Thank you.</p>
 <p>"INVEST 4 UMMAH - OPENING DOORS TO THE SHARIAH CAPITAL MARKET"</p>
 <p>'.$senderName.' | '.$senderPosition.' | BIMB Securities Sdn Bhd <br>
-Tel: '.$senderTel.' | '.$senderEmailAdd.' </p>';
+Tel: '.$senderTel.' | <a href="mailto:'.$senderEmailAdd.'">'.$senderEmailAdd.'</a> </p>';
 
 
 		$emailfile = fopen('documents/amla/draft-email/'.$subject.'.eml', 'w') or die ('Unable to open file!');

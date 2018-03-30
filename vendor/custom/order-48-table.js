@@ -15,34 +15,7 @@ $('#tab-amla-report').find('a').click(function(event) {
     $(tab).removeClass('d-none');
 })
 
-// Check/Uncheck following the Select/Deselect all checkbox
-/*$('#select-all-orders,#select-all-reports').change(function() {
-    var state = $(this).prop('checked');
-    var allCheckboxes = $(this).parent().parent().parent().parent().find('.checkbox');
-    allCheckboxes.prop('checked', state);
 
-    var table_name = $(this).parent().parent().parent().parent().parent().attr('id');
-    var checkbox = $(this).parent().parent().parent().parent().parent().find('.checkbox');
-
-    for (var i = checkbox.length - 1; i >= 0; i--) {
-
-        if (table_name == 'order-tab') {
-            check(checkbox[i], selectedOrder);
-        } else if (table_name == 'report-tab') {
-            check(checkbox[i], selectedReport);
-        }
-
-    }
-
-    
-})*/
-
-// Uncheck 'Select all' checkbox if any of the checkboxes is unchecked
-/*$('#order-tab,#report-tab').find('.checkbox').change(function() {
-    if (!this.checked) {
-        $(this).parent().parent().parent().parent().find('#select-all-orders,#select-all-reports').prop('checked', false)
-    }
-})*/
 
 // Enable click on table row to checked/unchecked the checkbox
 $('#order-tab,#report-tab').find('tr').click(function() {
@@ -55,20 +28,15 @@ $('#order-tab,#report-tab').find('tr').click(function() {
         check(checkbox, selectedOrder);
 
         /*Followed by updating the
-        generate email btn url, using the first*/
+        generate email btn url*/
         var row = $('#order-tab').find('.checkbox[value="'+selectedOrder[0]+'"]').parent().parent();
-        var to                 = row.find('td:nth-child(10)').text(); // Will edit
-        var cc                 = row.find('td:nth-child(10)').text(); // Will edit
-        var replySubject       = row.find('td:nth-child(5)').text(); // Will edit
-        var receivedSubject    = row.find('td:nth-child(5)').text(); // Will edit
+        var to                 = row.find('td:nth-child(10)').text();
+        var cc                 = row.find('td:nth-child(10)').text();
+        var subject       = row.find('td:nth-child(5)').text();
         var orderreceiveddate  = row.find('td:nth-child(6)').text();
-        var senderName         = 'Muhammad Ashraf Misran'; // Get from database using PHP
-        var post               = 'Compliance Officer'; // Get from database using PHP
-        var tel                = '03-2613 1626'; // Get from database using PHP
-        var senderEmail        = 'm.ashraf@bimbsec.com.my'; // Get from database using PHP
         // Re-format
         
-        var generateEmailURL = 'generate-reply-email.php?to='+to+'&cc='+cc+'&subject='+replySubject+'&replyto='+receivedSubject+'&orderreceiveddate='+orderreceiveddate+'&sender='+senderName+'&post='+post+'&tel='+tel+'&email='+senderEmail;
+        var generateEmailURL = 'generate-reply-email.php?to='+to+'&cc='+cc+'&subject='+subject+'&orderreceiveddate='+orderreceiveddate;
 
         $('#generate-email-btn').prop('href', generateEmailURL);
 

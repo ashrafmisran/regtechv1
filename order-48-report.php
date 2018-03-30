@@ -37,7 +37,21 @@
 		</thead>
 		<tbody>
 			<?php $run = load_data($conn, 'SELECT * FROM order_48 ORDER BY order_id DESC') ; while( $row = $run->fetch_assoc() ) {?>
-				
+				<?php
+					if ($row['status'] == 'archieve') {
+						$status = '<span class="badge badge-success">Archieved</span>';
+					}elseif($row['status'] == 'submitted'){
+						$status = '<span class="badge badge-warning">Submitted. Waiting for review</span>';
+					}elseif($row['status'] == 'verified'){
+						$status = '<span class="badge badge-warning">Verified. Waiting for submission</span>';
+					}elseif($row['status'] == 'processed'){
+						$status = '<span class="badge badge-warning">Processed. Waiting for verification</span>';
+					}else{
+						$status = '<span class="badge badge-danger">Waiting for processing</span>';
+					}
+
+				?>
+
 				<tr>
 					<td><input class="checkbox" type="checkbox" value="<?php echo $row['order_id'] ?>"></td>
 					<td>FINS-<?php echo $row['order_id'] ?></td>
@@ -49,7 +63,7 @@
 					<td><?php echo $row['no_of_comp'] ?></td>
 					<td><?php echo $row['matched'] ?></td>
 					<td><?php echo $row['remark'] ?></td>				
-					<td><span class="badge badge-warning">Waiting for processing</span></td>
+					<td><?php echo $status ?></td>
 				</tr>
 
 			<?php } ?>
