@@ -16,7 +16,7 @@ $('#tab-amla-report').find('a').click(function(event) {
 })
 
 // Check/Uncheck following the Select/Deselect all checkbox
-$('#select-all-orders,#select-all-reports').change(function() {
+/*$('#select-all-orders,#select-all-reports').change(function() {
     var state = $(this).prop('checked');
     var allCheckboxes = $(this).parent().parent().parent().parent().find('.checkbox');
     allCheckboxes.prop('checked', state);
@@ -35,18 +35,17 @@ $('#select-all-orders,#select-all-reports').change(function() {
     }
 
     
-})
+})*/
 
 // Uncheck 'Select all' checkbox if any of the checkboxes is unchecked
-$('#order-tab,#report-tab').find('.checkbox').change(function() {
+/*$('#order-tab,#report-tab').find('.checkbox').change(function() {
     if (!this.checked) {
         $(this).parent().parent().parent().parent().find('#select-all-orders,#select-all-reports').prop('checked', false)
     }
-})
+})*/
 
 // Enable click on table row to checked/unchecked the checkbox
 $('#order-tab,#report-tab').find('tr').click(function() {
-
     var checkbox = $(this).find('.checkbox');
     checkbox.prop('checked', !checkbox.prop("checked")); // Toggle the check-uncheck
     checkbox.parent().parent().parent().parent().find('#select-all-orders,#select-all-reports').prop('checked', false) // Uncheck select all
@@ -54,75 +53,51 @@ $('#order-tab,#report-tab').find('tr').click(function() {
     var table_name = $(this).parent().parent().parent().attr('id');
     if (table_name == 'order-tab') {
         check(checkbox, selectedOrder);
+
+        /*Followed by updating the
+        generate email btn url, using the first*/
+        var row = $('#order-tab').find('.checkbox[value="'+selectedOrder[0]+'"]').parent().parent();
+        var to                 = row.find('td:nth-child(3)').text(); // Will edit
+        var cc                 = row.find('td:nth-child(3)').text(); // Will edit
+        var replySubject       = row.find('td:nth-child(3)').text(); // Will edit
+        var receivedSubject    = row.find('td:nth-child(3)').text(); // Will edit
+        var orderreceiveddate  = row.find('td:nth-child(3)').text();
+        var senderName         = row.find('td:nth-child(3)').text(); // Will edit
+        var post               = row.find('td:nth-child(3)').text(); // Will edit
+        var tel                = row.find('td:nth-child(3)').text(); // Will edit
+        var senderEmail        = row.find('td:nth-child(3)').text(); // Will edit
+        // Re-format
+        
+        var generateEmailURL = 'generate-reply-email.php?to='+to+'&cc='+cc+'&subject='+replySubject+'&replyto='+receivedSubject+'&orderreceiveddate='+orderreceiveddate+'&sender='+senderName+'&post='+post+'&tel='+tel+'&email='+senderEmail;
+
+        $('#generate-email-btn').prop('href', generateEmailURL);
+
+        // Disable generate email button if more than 1 order selected or no row selected
+        if( typeof selectedOrder[1] !== 'undefined' || typeof selectedOrder[0] == 'undefined' ){
+            $('#generate-email-btn').addClass('disabled');
+        }else{
+            $('#generate-email-btn').removeClass('disabled');
+        }
+
+        // Disable process and delete order button if more than 1 order selected or no row selected
+        if( typeof selectedOrder[0] == 'undefined' ){
+            $('#process-order-btn, #remove-order-btn').addClass('disabled');
+        }else{
+            $('#process-order-btn, #remove-order-btn').removeClass('disabled');
+        }
+
     } else if (table_name == 'report-tab') {
         check(checkbox, selectedReport);
     }
+    
 })
+
 
 // Focus on cancel button
 $('.modal').on('shown.bs.modal', function (e) {
     $('.focus').trigger('focus')
 })
 
-// Generate send email form
-$('#modal-reply-order').on('shown.bs.modal', function (event) {
-    var replyFrom = $(event.relatedTarget).data('reply-from');
-    var replyTo = $(event.relatedTarget).data('reply-to');
-    var ccTo = $(event.relatedTarget).data('cc-to');
-    var replySubject = $(event.relatedTarget).data('subject');
-    var now = new Date();
-    var content = 
-        '<p>Dear Sir,</p>'+
-        '<p>Please find below our reply to the order served under Section 48 of AMLATFPUAA 2001: </p>'+
-        '<table style="width:100%">'+
-            '<tr>'+
-                '<td>Reply to</td>'+
-                '<td>Order dated......</td>'+
-            '</tr>'+
-            '<tr>'+
-                '<td>Order Received</td>'+
-                '<td>Order dated......</td>'+
-            '</tr>'+
-            '<tr>'+
-                '<td>Bank</td>'+
-                '<td>BIMB Securities Sdn Bhd</td>'+
-            '</tr>'+
-        '</table>'+
-        '<p>To provide all account(s) information under the name of the person(s) specified in the Order 48 AMLATFPUAA and any other accounts that this person is authorised to be as either the :</p>'+
-        '<ol>'+
-            '<li>Signatory; or</li>'+
-            '<li>Mandatee</li>'+
-        '</ol>'+
-        '<table>'+
-            '<tr>'+
-                '<td>Account Holder</td>'+
-                '<td>Account Number</td>'+
-                '<td>Branch</td>'+
-                '<td>Account Type</td>'+
-                '<td>Status<br>Active/Dormant/Closed</td>'+
-                '<td>Balance as at '+now.getDate()+'/'+now.getMonth()+'/'+now.getFullYear()+'</td>'+
-                '<td>Date Account Open</td>'+
-                '<td>Remarks</td>'+
-            '</tr>'+
-            '<tr>'+
-                '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>'+
-            '</tr>'+
-            '<tr>'+
-                '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>'+
-            '</tr>'+
-            '<tr>'+
-                '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>'+
-            '</tr>'+
-        '</table>'+
-        '<p>Thank you.</p>'+
-        '<p>FIRST END2END SHARIAH</p>';
-
-    $('#reply-from').val(replyFrom);
-    $('#reply-to').val(replyTo);
-    $('#reply-cc').val(ccTo);
-    $('#reply-subject').val(replySubject);
-    tinyMCE.activeEditor.setContent(content);
-})
 
 // Push selected row to array function
 function check(checkbox, array) {
@@ -132,6 +107,7 @@ function check(checkbox, array) {
         var index = array.indexOf(checkbox.val());
         array.splice(index, 1);
     }
+
     console.log(array);
 };
 
