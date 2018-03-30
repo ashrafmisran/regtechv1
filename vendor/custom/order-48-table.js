@@ -57,15 +57,15 @@ $('#order-tab,#report-tab').find('tr').click(function() {
         /*Followed by updating the
         generate email btn url, using the first*/
         var row = $('#order-tab').find('.checkbox[value="'+selectedOrder[0]+'"]').parent().parent();
-        var to                 = row.find('td:nth-child(3)').text(); // Will edit
-        var cc                 = row.find('td:nth-child(3)').text(); // Will edit
-        var replySubject       = row.find('td:nth-child(3)').text(); // Will edit
-        var receivedSubject    = row.find('td:nth-child(3)').text(); // Will edit
-        var orderreceiveddate  = row.find('td:nth-child(3)').text();
-        var senderName         = row.find('td:nth-child(3)').text(); // Will edit
-        var post               = row.find('td:nth-child(3)').text(); // Will edit
-        var tel                = row.find('td:nth-child(3)').text(); // Will edit
-        var senderEmail        = row.find('td:nth-child(3)').text(); // Will edit
+        var to                 = row.find('td:nth-child(10)').text(); // Will edit
+        var cc                 = row.find('td:nth-child(10)').text(); // Will edit
+        var replySubject       = row.find('td:nth-child(5)').text(); // Will edit
+        var receivedSubject    = row.find('td:nth-child(5)').text(); // Will edit
+        var orderreceiveddate  = row.find('td:nth-child(6)').text();
+        var senderName         = 'Muhammad Ashraf Misran'; // Get from database using PHP
+        var post               = 'Compliance Officer'; // Get from database using PHP
+        var tel                = '03-2613 1626'; // Get from database using PHP
+        var senderEmail        = 'm.ashraf@bimbsec.com.my'; // Get from database using PHP
         // Re-format
         
         var generateEmailURL = 'generate-reply-email.php?to='+to+'&cc='+cc+'&subject='+replySubject+'&replyto='+receivedSubject+'&orderreceiveddate='+orderreceiveddate+'&sender='+senderName+'&post='+post+'&tel='+tel+'&email='+senderEmail;
