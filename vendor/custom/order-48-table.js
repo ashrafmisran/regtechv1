@@ -30,10 +30,10 @@ $('#order-tab,#report-tab').find('tr').click(function() {
         /*Followed by updating the
         generate email btn url*/
         var row = $('#order-tab').find('.checkbox[value="'+selectedOrder[0]+'"]').parent().parent();
-        var to                 = row.find('td:nth-child(10)').text();
-        var cc                 = row.find('td:nth-child(10)').text();
-        var subject       = row.find('td:nth-child(5)').text();
+        var subject            = row.find('td:nth-child(5)').text();
         var orderreceiveddate  = row.find('td:nth-child(6)').text();
+        var to                 = row.find('td:nth-child(10)').text();
+        var cc                 = row.find('td:nth-child(11)').text();
         // Re-format
         
         var generateEmailURL = 'generate-reply-email.php?to='+to+'&cc='+cc+'&subject='+subject+'&orderreceiveddate='+orderreceiveddate;

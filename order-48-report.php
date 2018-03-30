@@ -31,6 +31,8 @@
 				<th>Individual</th>
 				<th>Company</th>
 				<th>Matched</th>
+				<th>Reply-to</th>
+				<th>Reply-cc</th>
 				<th>Remark</th>
 				<th>Status</th>
 			</tr>
@@ -62,6 +64,8 @@
 					<td><?php echo $row['no_of_indvdl'] ?></td>
 					<td><?php echo $row['no_of_comp'] ?></td>
 					<td><?php echo $row['matched'] ?></td>
+					<td><?php echo $row['reply_to'] ?></td>
+					<td><?php echo $row['reply_cc'] ?></td>
 					<td><?php echo $row['remark'] ?></td>				
 					<td><?php echo $status ?></td>
 				</tr>

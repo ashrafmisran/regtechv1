@@ -1,13 +1,11 @@
 <?php
     session_start();
 
-	$senderEmailAdd = $_GET['sender'];
 	$to 			= $_GET['to'];
 	$cc 			= $_GET['cc'];
 	/*$subject	= */  preg_match('/(Section 48.*)(?:\.msg)/', $_GET['subject'], $subject);
 	/*$replyTo = */   preg_match('/(Order dated.*)(?:\.msg)/', $_GET['subject'], $replyTo);
 	$orderReceived 	= $_GET['orderreceiveddate'];
-	$to 			= $_GET['to'];
 	$senderName		= $_SESSION['user']['fullname'];
 	$senderPosition	= $_SESSION['user']['position'];
 	$senderTel		= $_SESSION['user']['phone'];
@@ -94,14 +92,14 @@ Content-Type: text/html
 Tel: '.$senderTel.' | <a href="mailto:'.$senderEmailAdd.'">'.$senderEmailAdd.'</a> </p>';
 
 
-		$emailfile = fopen('documents/amla/draft-email/'.$subject.'.eml', 'w') or die ('Unable to open file!');
+		$emailfile = fopen('documents/amla/draft-email/'.$subject[1].'.eml', 'w+') or die ('Unable to open file!');
 		fwrite($emailfile, $content);
 		fclose($emailfile);
 
 		echo '
 			<script type="text/javascript">
                 // Download
-				window.open("documents/amla/draft-email/'.$subject.'.eml");
+				window.open("documents/amla/draft-email/'.$subject[1].'.eml");
 
 				window.location.replace("'.$_SERVER['HTTP_REFERER'].'");
 				

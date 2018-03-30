@@ -87,12 +87,14 @@
 		$id 					= substr($_POST['order-id'],4);
 		$email_received_date 	= substr($_POST['email-received-date'],6,4) .'-'. substr($_POST['email-received-date'],3,2) .'-'. substr($_POST['email-received-date'],0,2);
 		$order_date 			= date("Y-m-d", strtotime( $order_date[1] ));
+		$reply_to				= $_POST['reply-to'];
+		$reply_cc				= $_POST['cc-to'];
 		$remark 				= $_POST['remark'];
 
 
 		// Initialize the SQL Query
-		$sql = "INSERT INTO order_48 (order_id,order_date,orderer,received_email,receive_date,no_of_indvdl,no_of_comp,remark) 
-							  VALUES ('$id','$order_date','$source[1]','$email','$email_received_date','$no_of_indvdl[1]','$no_of_comp[1]','$remark')";
+		$sql = "INSERT INTO order_48 (order_id,order_date,orderer,received_email,receive_date,no_of_indvdl,no_of_comp,reply_to,reply_cc,remark) 
+							  VALUES ('$id','$order_date','$source[1]','$email','$email_received_date','$no_of_indvdl[1]','$no_of_comp[1]','$reply_to','$reply_cc','$remark')";
 
 		$run = $conn->query($sql);
 
