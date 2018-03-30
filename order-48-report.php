@@ -54,7 +54,7 @@
 
 				<tr>
 					<td><input class="checkbox" type="checkbox" value="<?php echo $row['order_id'] ?>"></td>
-					<td>FINS-<?php echo $row['order_id'] ?></td>
+					<td>ORD-<?php echo $row['order_id'] ?></td>
 					<td><?php echo $row['order_date'] ?></td>
 					<td><?php echo $row['orderer'] ?></td>
 					<td><?php echo $row['received_email'] ?></td>
@@ -134,22 +134,7 @@
 					<div class="modal-body">
 						<div class="form-group form-row">
 							<label class="col-md-3">Order Id</label>
-							<input type="text" name="order-id" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
-								if(isset($_GET['id'])){
-									echo 'FINS-'. $_GET['id'];
-								}else{
-									$sql = 'SELECT order_id as row FROM order_48 ORDER BY order_id DESC LIMIT 1';
-									$run = $conn->query($sql);
-									if($run->num_rows > 0) {
-										while($row = $run->fetch_assoc()){
-											echo('FINS-'.(1+$row['row']));
-										}
-									}else{
-										echo('FINS-100000');
-									}
-									
-								}
-							?>">
+							<input id="order-id" type="text" name="order-id" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly>
 							<input type="text" name="new-or-edit" class="form-control col-md-6" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this order" readonly value="<?php 
 								if(isset($_GET['id'])){ 
 									echo 'edit';
@@ -158,13 +143,9 @@
 								}
 							?>" hidden>
 						</div>
-						<!--div class="form-group form-row">
-							<label class="col-md-6">Order Date</label>
-							<input type="text" name="order-date" class="singledatepicker form-control col-md-6" data-toggle="tooltip" data-placement="bottom" title="The date the inquirer sent the order to FINS">
-						</div-->
 						<div class="form-group form-row">
-							<label class="col-md-3">Email Recieved Date</label>
-							<input type="text" name="email-received-date" class="singledatepicker form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="The date FINS sent the order to BIMBSEC">
+							<label class="col-md-3">Email Received Date</label>
+							<input id="email-received-date" type="text" name="email-received-date" class="singledatepicker form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="The date FINS sent the order to BIMBSEC" onchange="updateId()">
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Email from FINS</label>

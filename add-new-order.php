@@ -84,7 +84,7 @@
 		preg_match('/dated\s([0-9]{1,2}\s\b.*\b\s[0-9]{4})/', $email, $order_date);
 		preg_match('/([0-9]*)\sindividual/', $email, $no_of_indvdl);
 		preg_match('/([0-9]*)\scompa/', $email, $no_of_comp);
-		$id 					= substr($_POST['order-id'],5);
+		$id 					= substr($_POST['order-id'],4);
 		$email_received_date 	= substr($_POST['email-received-date'],6,4) .'-'. substr($_POST['email-received-date'],3,2) .'-'. substr($_POST['email-received-date'],0,2);
 		$order_date 			= date("Y-m-d", strtotime( $order_date[1] ));
 		$remark 				= $_POST['remark'];

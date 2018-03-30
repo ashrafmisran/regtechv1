@@ -60,6 +60,23 @@ $('#order-tab,#report-tab').find('tr').click(function() {
     
 })
 
+// Set value for order ID from received email date
+function updateId(){
+    var date   = $('#email-received-date').val();
+        date   = date.substring(8,10)+date.substring(3,5)+date.substring(0,2);
+    var now    = new Date();
+    var start  = new Date();
+        start.setHours(6);
+        start.setMinutes(0);
+        start.setSeconds(0);
+
+    seconds  = (now-start)/1000;
+    var unic = seconds.toString(16).toUpperCase();
+
+    id = 'ORD-'+date+'-'+unic;
+    $('#order-id').val(id);
+}
+
 
 // Focus on cancel button
 $('.modal').on('shown.bs.modal', function (e) {
