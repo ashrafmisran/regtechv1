@@ -46,33 +46,17 @@
 				$attachments = $_FILES['attachment'];
 				$no_of_attachment = count($attachments['name']);
 
-				$attached_files = array();
 
 				for ($i=0; $i < $no_of_attachment; $i++) { 
 					
 					$j = $i+1; // Numbering
 					$fileType = pathinfo($attachments['name'][$i], PATHINFO_EXTENSION); // File extension
-					$target_file = $order_folder.'/'.$init.'2 - Attachment '   .$j.   '.'; // New file name and location
+					$target_file = $order_folder. '/' .$init. '2 - Attachment '   .$j.   '.'   .$fileType; // New file name and location
 					
-					$uploadOk = true;
-
-					// Check if file already exists
-					if (file_exists($target_file)) {
-					    $uploadOk = false;
-					}
-
-					// Check file type. Make sure it is a valid email file
-					if($fileType != "xls" && $fileType && "xlsx" && $fileType && "doc" && $fileType != "docx" && $fileType != "pdf" ) {
-					    $uploadOk = false;
-					}
-
-					// If all are ok, upload
-					if ($uploadOk) {
-						if (move_uploaded_file($attachments["tmp_name"][$i], $target_file)) {
-							array_push($attached_files, $target_file);
-						}
-					}
-
+					// Upload
+					$origin = $attachments["tmp_name"][$i];
+					$upload = move_uploaded_file( $origin, $target_file );
+					
 				}
 
 	// Save the name of the uploaded files in database
