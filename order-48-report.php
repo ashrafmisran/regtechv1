@@ -19,20 +19,20 @@
 		<button id="remove-order-btn" class="btn btn-danger mb-2 disabled" data-toggle="modal" data-target="#modal-delete-order">Remove selected</button>
 	</div>
 
-	<table id="order-table" class="table table-hover">
+	<table id="order-table" class="table table-hover w-100">
 		<thead>
 			<tr>
 				<th><!-- <input id="select-all-orders" type="checkbox"> --></th>
 				<th>Order ID</th>
 				<th>Order Date</th>
 				<th>Orderer</th>
-				<th>Received Email Subject</th>
+				<!-- <th>Received Email Subject</th> -->
 				<th>Email Received Date</th>
 				<th>Individual</th>
 				<th>Company</th>
 				<th>Matched</th>
-				<th>Reply-to</th>
-				<th>Reply-cc</th>
+				<!-- <th>Reply-to</th>
+				<th>Reply-cc</th> -->
 				<th>Remark</th>
 				<th>Status</th>
 			</tr>
@@ -59,13 +59,13 @@
 					<td>ORD-<?php echo $row['order_id'] ?></td>
 					<td><?php echo $row['order_date'] ?></td>
 					<td><?php echo $row['orderer'] ?></td>
-					<td><?php echo $row['received_email'] ?></td>
+					<!-- <td><?php echo $row['received_email'] ?></td> -->
 					<td><?php echo $row['receive_date'] ?></td>
 					<td><?php echo $row['no_of_indvdl'] ?></td>
 					<td><?php echo $row['no_of_comp'] ?></td>
 					<td><?php echo $row['matched'] ?></td>
-					<td><?php echo $row['reply_to'] ?></td>
-					<td><?php echo $row['reply_cc'] ?></td>
+					<!-- <td><?php echo $row['reply_to'] ?></td>
+					<td><?php echo $row['reply_cc'] ?></td> -->
 					<td><?php echo $row['remark'] ?></td>				
 					<td><?php echo $status ?></td>
 				</tr>
