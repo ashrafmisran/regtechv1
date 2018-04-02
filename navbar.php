@@ -9,13 +9,13 @@
       <li class="nav-item active">
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li> 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="?p=order-48-upload">Order 48 Upload</span></a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" href="?p=order-48-report">Order 48 Report</span></a>
       </li>
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Shariah
         </a>
@@ -44,7 +44,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Monthly summary</a>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Setting
