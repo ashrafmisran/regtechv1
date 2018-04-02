@@ -32,8 +32,8 @@ $('#order-tab,#report-tab').find('tr').click(function() {
         var row = $('#order-tab').find('.checkbox[value="'+selectedOrder[0]+'"]').parent().parent();
         var subject            = row.find('td:nth-child(5)').text();
         var orderreceiveddate  = row.find('td:nth-child(6)').text();
-        var to                 = row.find('td:nth-child(10)').text();
-        var cc                 = row.find('td:nth-child(11)').text();
+        var to                 = row.find('td:nth-child(11)').text();
+        var cc                 = row.find('td:nth-child(12)').text();
         // Re-format
         
         var generateEmailURL = 'generate-reply-email.php?to='+to+'&cc='+cc+'&subject='+subject+'&orderreceiveddate='+orderreceiveddate;

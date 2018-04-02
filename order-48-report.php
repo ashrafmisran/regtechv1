@@ -27,14 +27,14 @@
 				<th>Order ID</th>
 				<th>Order Date</th>
 				<th>Orderer</th>
-				<!-- <th>Received Email Subject</th> -->
+				<th class="d-none">Received Email Subject</th>
 				<th>Received Date</th>
 				<th>Ind</th>
 				<th>Comp</th>
 				<th>Found</th>
 				<th>Files Uploaded</th>
-				<!-- <th>Reply-to</th>
-				<th>Reply-cc</th> -->
+				<th class="d-none">Reply-to</th>
+				<th class="d-none">Reply-cc</th>
 				<th>Remark</th>
 				<th>Status</th>
 			</tr>
@@ -61,29 +61,36 @@
 					<td>ORD-<?php echo $row['order_id'] ?></td>
 					<td><?php echo $row['order_date'] ?></td>
 					<td><?php echo $row['orderer'] ?></td>
-					<!-- <td><?php echo $row['received_email'] ?></td> -->
+					<td class="d-none"><?php echo $row['received_email'] ?></td>
 					<td><?php echo $receive_date = $row['receive_date'] ?></td>
 					<td><?php echo $row['no_of_indvdl'] ?></td>
 					<td><?php echo $row['no_of_comp'] ?></td>
 					<td><?php echo $row['matched'] ?></td>
 					<td>
-						<select class="w-100 form-control form-control-sm">
-							<option disabled selected>Select to view</option>
-							<?php if(TRUE){ 
-								$dir = 'documents/amla/ORD-'.$row['order_id'];
-								if (is_dir($dir)){
-								    if ($dh = opendir($dir)){
-								        while (($file = readdir($dh)) !== false){ ?>
-								        	<?php if($file == '.' OR $file == '..'){continue;} ?>
-								        	<option><?php echo $file; ?></option>
-									    <?php } ?>
-								    <?php } ?>
-								<?php } ?>
-							<?php } ?>
-						</select>
+						<div class="row">
+							<div class="col-9">
+								<select class="w-100 form-control form-control-sm">
+									<option disabled selected>Select to view</option>
+									<?php if(TRUE){ 
+										$dir = 'documents/amla/ORD-'.$row['order_id'];
+										if (is_dir($dir)){
+										    if ($dh = opendir($dir)){
+										        while (($file = readdir($dh)) !== false){ ?>
+										        	<?php if($file == '.' OR $file == '..'){continue;} ?>
+										        	<option><?php echo $file; ?></option>
+											    <?php } ?>
+										    <?php } ?>
+										<?php } ?>
+									<?php } ?>
+								</select>
+							</div>
+							<div class="col-3">
+								<button class="btn btn-primary btn-sm">View</button>
+							</div>
+						</div>
 					</td>
-					<!-- <td><?php echo $row['reply_to'] ?></td>
-					<td><?php echo $row['reply_cc'] ?></td> -->
+					<td class="d-none"><?php echo $row['reply_to'] ?></td>
+					<td class="d-none"><?php echo $row['reply_cc'] ?></td>
 					<td><?php echo $row['remark'] ?></td>				
 					<td><?php echo $row['status'] ?></td>
 				</tr>
@@ -175,11 +182,11 @@
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Email from FINS</label>
-							<input type="file" name="fins-email" class="form-control col-md-9" required>
+							<input type="file" name="fins-email" class="form-control col-md-9" required accept=".msg">
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Attached files</label>
-							<input type="file" name="attachment[]" class="form-control col-md-9" multiple data-toggle="tooltip" data-placement="bottom" title="You may upload multiple files" required>
+							<input type="file" name="attachment[]" class="form-control col-md-9" multiple data-toggle="tooltip" data-placement="bottom" title="You may upload multiple files" required accept=".pdf,.xls,.xlsx,.doc,.docx">
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Investigators' Email</label>
@@ -196,7 +203,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary">Add</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</form>
@@ -294,7 +301,7 @@
 	<div class="modal fade" id="modal-add-new-report">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<form>
+				<form action="add-new-order-report.php" method="post" enctype="multipart/form-data">
 					<div class="modal-header">
 						<h4 class="modal-title">Add new report</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -305,22 +312,26 @@
 					<div class="modal-body">
 						<div class="form-group form-row">
 							<label class="col-md-3">Report Id</label>
-							<input id="order-id" type="text" name="order-id" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this report" readonly>
+							<input id="report-id" type="text" name="report-id" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this report" readonly>
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Upload report</label>
-							<input type="file" name="report" class="form-control col-md-9" required>
+							<input type="file" name="report" class="form-control col-md-9" required accept=".msg,.eml">
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Order(s) ID</label>
 							<div class="col-md-9">
-								<select id="select-order-id" type="text" name="order-id" class="form-control" style="width:100%" multiple>
-									<?php  $run = load_data($conn, 'SELECT * FROM order_48 ORDER BY order_id DESC') ; while( $row = $run->fetch_assoc() ) { ?>
-										<option value="<?php echo $row['order_id']; ?>">ORD-<?php echo $row['order_id']; ?></option>
+								<select id="select-order-id" type="text" name="select-order-id[]" class="form-control" style="width:100%" multiple>
+									<?php 
+									$folder = scandir('documents/amla'); 
+									foreach ($folder as $subfolder) { 
+										if( substr($subfolder,0,4) == 'ORD-' ) { ?>
+											<option value="<?php echo $subfolder; ?>"><?php echo $subfolder; ?></option>
+										<?php } ?>
 									<?php } ?>
 								</select>	
+								<small class="form-text text-muted">Click <kbd>Ctrl</kbd> to select multiple orders.</small>
 							</div>
-							
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Remark</label>
@@ -328,8 +339,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary">Add</button>
 					</div>
 				</form>
 			</div><!-- /.modal-content -->
