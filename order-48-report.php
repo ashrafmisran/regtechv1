@@ -1,21 +1,22 @@
 <h3 class="text-center">Order 48</h3>
 <ul id="tab-amla-report" class="nav nav-tabs mb-2">
   <li class="nav-item">
-    <a class="nav-link active" data-tab="#order-tab">Order</a>
+    <a class="nav-link " data-tab="#order-tab">Order</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab="#report-tab">Report</a>
+    <a class="nav-link active" data-tab="#report-tab">Report</a>
   </li>
 </ul>
 
 
 
-<div id="order-tab" class="tab-box animated">
+<div id="order-tab" class="d-none tab-box animated">
 	
 	<div id="button-menu-order" class="form-group">
 		<button id="add-new-order-btn" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#modal-add-new-order">Add new order</button>
-		<button id="process-order-btn" class="btn btn-dark mb-2 mr-2 disabled" data-toggle="modal" data-target="#modal-process-order">Attach selected Order(s) to Report</button>
+		<!-- <button id="process-order-btn" class="btn btn-dark mb-2 mr-2 disabled" data-toggle="modal" data-target="#modal-process-order">Attach selected Order(s) to Report</button> -->
 		<a id="generate-email-btn" href="" class="btn disabled mr-2 mb-2 btn-dark">Generate Individual Reply E-mail</a>
+		<a id="upload-replied-email-btn" href="" class="btn disabled mr-2 mb-2 btn-dark">Upload Replied Email</a>
 		<button id="remove-order-btn" class="btn btn-danger mb-2 disabled" data-toggle="modal" data-target="#modal-delete-order">Remove selected</button>
 	</div>
 
@@ -77,10 +78,16 @@
 
 
 
-<div id="report-tab" class="d-none tab-box animated">
+<div id="report-tab" class="tab-box animated">
 	
 	<div id="button-menu-report" class="form-group">
-		<button class="btn btn-primary mb-2">Submit selected</button>
+		<button class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add-new-report">Add new report</button>
+		<button class="btn btn-dark mb-2">Submit for verification</button>
+		<button class="btn btn-dark mb-2">Verify</button>
+		<button class="btn btn-dark mb-2">Please re-submit</button>
+		<button class="btn btn-dark mb-2">Submit to HOD</button>
+		<button class="btn btn-dark mb-2">Reviewed</button>
+		<button class="btn btn-dark mb-2">Please re-submit</button>
 		<button class="btn btn-danger mb-2" data-toggle="modal" data-target="#modal-delete-report">Remove selected</button>
 	</div>
 
@@ -91,25 +98,23 @@
 				<th>Report ID</th>
 				<th>Processing Date</th>
 				<th>Order List</th>
-				<th>Matched</th>
 				<th>Remark</th>
 				<th>Status</th>
 				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php $run = load_data($conn, 'SELECT * FROM order_48 ORDER BY order_id DESC') ; while( $row = $run->fetch_assoc() ) {?>
+			<?php $run = load_data($conn, 'SELECT * FROM order_48_report ORDER BY report_id DESC') ; while( $row = $run->fetch_assoc() ) {?>
 				
 				<tr>
 					<td><input class="checkbox" type="checkbox" value="<?php echo $row['order_id'] ?>"></td>
-					<td>REP-<?php echo $row['order_id'] ?></td>
+					<td>REP-<?php echo $row['report_id'] ?></td>
 					<td>Processing date</td>
 					<td>
 						<select class="form-control">
 							<option>Test</option>
 						</select>
 					</td>
-					<td><?php echo $row['matched'] ?></td>
 					<td><?php echo $row['remark'] ?></td>				
 					<td><span class="badge badge-warning">Waiting for submission</span></td>
 					<td></td>
@@ -161,11 +166,11 @@
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Investigators' Email</label>
-							<textarea type="text" name="reply-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" required></textarea>
+							<textarea type="text" name="reply-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" required placeholder="You may add the email when generate the email, if you want to"></textarea>
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Cc Email</label>
-							<textarea type="text" name="cc-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" required></textarea>
+							<textarea type="text" name="cc-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" required placeholder="You may add the email when generate the email, if you want to"></textarea>
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Remark</label>
@@ -269,6 +274,51 @@
 </div>
 
 <div id="modal-group-report">
+	<div class="modal fade" id="modal-add-new-report">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">
+						<h4 class="modal-title">Add new report</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group form-row">
+							<label class="col-md-3">Report Id</label>
+							<input id="order-id" type="text" name="order-id" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="The Unique ID for this report" readonly>
+						</div>
+						<div class="form-group form-row">
+							<label class="col-md-3">Upload report</label>
+							<input type="file" name="report" class="form-control col-md-9" required>
+						</div>
+						<div class="form-group form-row">
+							<label class="col-md-3">Order(s) ID</label>
+							<div class="col-md-9">
+								<select id="select-order-id" type="text" name="order-id" class="form-control" style="width:100%" multiple>
+									<?php  $run = load_data($conn, 'SELECT * FROM order_48 ORDER BY order_id DESC') ; while( $row = $run->fetch_assoc() ) { ?>
+										<option value="<?php echo $row['order_id']; ?>">ORD-<?php echo $row['order_id']; ?></option>
+									<?php } ?>
+								</select>	
+							</div>
+							
+						</div>
+						<div class="form-group form-row">
+							<label class="col-md-3">Remark</label>
+							<textarea type="text" name="remark" class="form-control col-md-9" placeholder="Optional..."></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 	<div class="modal fade" id="modal-delete-report">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -285,7 +335,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="focus btn btn-danger" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-secondary" onclick="removeFrom('order_48',selectedReport)">Confirm deletion</button>
+					<button type="button" class="btn btn-secondary" onclick="removeFrom('order_48_report',selectedReport)">Confirm deletion</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
