@@ -96,12 +96,13 @@ Tel: '.$senderTel.' | <a href="mailto:'.$senderEmailAdd.'">'.$senderEmailAdd.'</
 		fwrite($emailfile, $content);
 		fclose($emailfile);
 
-		echo '
-			<script type="text/javascript">
+		echo '<script type="text/javascript">
                 // Download
-				window.open("documents/amla/draft-email/'.$subject[1].'.eml");
+				window.open("documents/amla/draft-email/'.$subject[1].'.eml");';
 
-				window.location.replace("'.$_SERVER['HTTP_REFERER'].'");
+                unlink("documents/amla/draft-email/".$subject[1].".eml");
+
+                echo 'window.location.replace("'.$_SERVER['HTTP_REFERER'].'");
 				
 			</script>
 		';
