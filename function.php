@@ -35,19 +35,24 @@
 
     // Function to Copy folders and files       
     function rcopy($src, $dst) {
-        if (file_exists ( $dst ))
-            rrmdir ( $dst );
         if (is_dir ( $src )) {
-        	if (!is_dir($dst)) {
+        	if (!is_dir($dst))
         		mkdir ( $dst );	
-        	}
-            $files = scandir ( $src );
-            foreach ( $files as $file )
-                if ($file != "." && $file != "..")
-                    rcopy ( "$src/$file", "$dst/$file" );
-        } else if (file_exists ( $src ))
+        	$files = scandir ( $src );
+
+        	// Remove if the directory only have . and ..
+            if (count($files) == 2){
+            	rmdir($src);
+            }else{
+            	
+	            foreach ( $files as $file )
+	                if ($file != "." && $file != "..")
+	                    rcopy ( "$src/$file", "$dst/$file" );
+	        }
+        } elseif (file_exists ( $src )) {
             copy ( $src, $dst );
-            echo('Copied<br>');
+            unlink($src);
+        }
     }
 
 ?>

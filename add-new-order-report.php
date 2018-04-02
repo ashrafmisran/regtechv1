@@ -29,8 +29,8 @@
 
 	// Move the Order folder to Batch folder
 	foreach ($_POST['select-order-id'] as $order_id){
-		$source = 'documents/amla/ORD-'.$order_id;
-		$destination = $folder.$div.'ORD-'.$order_id;
+		$source = 'documents/amla/'.$order_id;
+		$destination = $folder.$div.$order_id;
 	    rcopy($source , $destination );
 	 }
 

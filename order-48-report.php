@@ -27,14 +27,14 @@
 				<th>Order ID</th>
 				<th>Order Date</th>
 				<th>Orderer</th>
-				<!-- <th>Received Email Subject</th> -->
+				<th class="d-none">Received Email Subject</th>
 				<th>Received Date</th>
 				<th>Ind</th>
 				<th>Comp</th>
 				<th>Found</th>
 				<th>Files Uploaded</th>
-				<!-- <th>Reply-to</th>
-				<th>Reply-cc</th> -->
+				<th class="d-none">Reply-to</th>
+				<th class="d-none">Reply-cc</th>
 				<th>Remark</th>
 				<th>Status</th>
 			</tr>
@@ -61,7 +61,7 @@
 					<td>ORD-<?php echo $row['order_id'] ?></td>
 					<td><?php echo $row['order_date'] ?></td>
 					<td><?php echo $row['orderer'] ?></td>
-					<!-- <td><?php echo $row['received_email'] ?></td> -->
+					<td class="d-none"><?php echo $row['received_email'] ?></td>
 					<td><?php echo $receive_date = $row['receive_date'] ?></td>
 					<td><?php echo $row['no_of_indvdl'] ?></td>
 					<td><?php echo $row['no_of_comp'] ?></td>
@@ -89,8 +89,8 @@
 							</div>
 						</div>
 					</td>
-					<!-- <td><?php echo $row['reply_to'] ?></td>
-					<td><?php echo $row['reply_cc'] ?></td> -->
+					<td class="d-none"><?php echo $row['reply_to'] ?></td>
+					<td class="d-none"><?php echo $row['reply_cc'] ?></td>
 					<td><?php echo $row['remark'] ?></td>				
 					<td><?php echo $row['status'] ?></td>
 				</tr>
