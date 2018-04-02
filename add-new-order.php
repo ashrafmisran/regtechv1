@@ -52,7 +52,7 @@
 					
 					$j = $i+1; // Numbering
 					$fileType = pathinfo($attachments['name'][$i], PATHINFO_EXTENSION); // File extension
-					$target_file = $batch_folder.'/'.$init.'2 - Attachment '   .$j.   '.'   .$fileType; // New file name and location
+					$target_file = $order_folder.'/'.$init.'2 - Attachment '   .$j.   '.'; // New file name and location
 					
 					$uploadOk = true;
 

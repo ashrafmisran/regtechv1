@@ -28,10 +28,11 @@
 				<th>Order Date</th>
 				<th>Orderer</th>
 				<!-- <th>Received Email Subject</th> -->
-				<th>Email Received Date</th>
-				<th>Individual</th>
-				<th>Company</th>
-				<th>Matched</th>
+				<th>Received Date</th>
+				<th>Ind</th>
+				<th>Comp</th>
+				<th>Found</th>
+				<th>Files Uploaded</th>
 				<!-- <th>Reply-to</th>
 				<th>Reply-cc</th> -->
 				<th>Remark</th>
@@ -61,14 +62,30 @@
 					<td><?php echo $row['order_date'] ?></td>
 					<td><?php echo $row['orderer'] ?></td>
 					<!-- <td><?php echo $row['received_email'] ?></td> -->
-					<td><?php echo $row['receive_date'] ?></td>
+					<td><?php echo $receive_date = $row['receive_date'] ?></td>
 					<td><?php echo $row['no_of_indvdl'] ?></td>
 					<td><?php echo $row['no_of_comp'] ?></td>
 					<td><?php echo $row['matched'] ?></td>
+					<td>
+						<select class="w-100 form-control form-control-sm">
+							<option disabled selected>Select to view</option>
+							<?php if(TRUE){ 
+								$dir = 'documents/amla/ORD-'.$row['order_id'];
+								if (is_dir($dir)){
+								    if ($dh = opendir($dir)){
+								        while (($file = readdir($dh)) !== false){ ?>
+								        	<?php if($file == '.' OR $file == '..'){continue;} ?>
+								        	<option><?php echo $file; ?></option>
+									    <?php } ?>
+								    <?php } ?>
+								<?php } ?>
+							<?php } ?>
+						</select>
+					</td>
 					<!-- <td><?php echo $row['reply_to'] ?></td>
 					<td><?php echo $row['reply_cc'] ?></td> -->
 					<td><?php echo $row['remark'] ?></td>				
-					<td><?php echo $status ?></td>
+					<td><?php echo $row['status'] ?></td>
 				</tr>
 
 			<?php } ?>
@@ -166,11 +183,11 @@
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Investigators' Email</label>
-							<textarea type="text" name="reply-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" required placeholder="You may add the email when generate the email, if you want to"></textarea>
+							<textarea type="text" name="reply-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" placeholder="You may add the email when generate the email, if you want to"></textarea>
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Cc Email</label>
-							<textarea type="text" name="cc-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" required placeholder="You may add the email when generate the email, if you want to"></textarea>
+							<textarea type="text" name="cc-to" class="form-control col-md-9" data-toggle="tooltip" data-placement="bottom" title="Seperate multiple emails with semicolon (;)" placeholder="You may add the email when generate the email, if you want to"></textarea>
 						</div>
 						<div class="form-group form-row">
 							<label class="col-md-3">Remark</label>
