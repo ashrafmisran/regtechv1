@@ -100,7 +100,7 @@ Tel: '.$senderTel.' | <a href="mailto:'.$senderEmailAdd.'">'.$senderEmailAdd.'</
                 // Download
 				window.open("documents/amla/draft-email/'.$subject[1].'.eml");';
 
-                unlink("documents/amla/draft-email/".$subject[1].".eml");
+                //unlink("documents/amla/draft-email/".$subject[1].".eml");
 
                 echo 'window.location.replace("'.$_SERVER['HTTP_REFERER'].'");
 				
