@@ -14,4 +14,4 @@ Compliance Assessment Report System (CARS) is a Regtech that simplifies the proc
 
 # Any Issue
 
-Any issue could be forwarded to [m.ashraf@bimbsec.com.my]
+Any issue could be forwarded to [m.ashraf@bimbsec.com.my](mailto:m.ashraf@bimbsec.com.my).
