@@ -11,4 +11,7 @@ Compliance Assessment Report System (CARS) is a Regtech that simplifies the proc
 
 1. First, the user has to login using the user credentials provided by IT Department.
 1. To start with, the user has to add a new report once FINS sent Order 48 email.
-`Test` _has_ **car**.
+
+# Any Issue
+
+Any issue could be forwarded to [m.ashraf@bimbsec.com.my]
